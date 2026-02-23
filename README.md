@@ -65,7 +65,7 @@ CREATE DATABASE covid_db;
 ### 5. Ejecutar la aplicación
 
 ``` bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ## Uso
@@ -93,4 +93,5 @@ Luego se recarga la vista con los datos actualizados.
 ## Autor
 
 Fabian Paillaleo
+
 
