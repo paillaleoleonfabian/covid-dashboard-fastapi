@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Covid Dashboard</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-6">
+
+<div class="max-w-6xl mx-auto">
+
+    <h1 class="text-3xl font-bold mb-6 text-center">
+        🌎 Covid South America Dashboard
+    </h1>
+
+    <div class="flex justify-between items-center mb-4">
+
+    <p id="last-sync" class="text-gray-600 text-sm"></p>
+
+    <div class="flex justify-between items-center mb-6">
+
+  <p id="last-sync" class="text-gray-500 text-sm"></p>
+
+  <button
+    id="refresh-btn"
+    onclick="refreshData()"
+    class="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-5 py-2.5 rounded-lg shadow-md hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg active:scale-95 transition-all duration-200"
+  >
+    <span id="refresh-text">Refrescar datos</span>
+
+  </button>
+
+</div>
+
+    </div>
+
+    <div class="bg-white shadow rounded overflow-x-auto">
+
+        <table class="w-full border-collapse">
+
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="p-3 text-left">País</th>
+                    <th class="p-3 text-right">Casos</th>
+                    <th class="p-3 text-right">Muertes</th>
+                    <th class="p-3 text-right">Activos</th>
+                    <th class="p-3 text-right">Población</th>
+                    <th class="p-3 text-right">Última actualización</th>
+                </tr>
+            </thead>
+
+            <tbody id="countries-body"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script>
+
+fetch("/api/countries")
+  .then(res => res.json())
+  .then(data => {
+
+    const tbody = document.getElementById("countries-body");
+
+    data.forEach(c => {
+
+      const row = `
+        <tr class="border-b hover:bg-gray-50">
+            <td class="p-3 font-medium">${c.country}</td>
+            <td class="p-3 text-right">${c.cases.toLocaleString()}</td>
+            <td class="p-3 text-right">${c.deaths.toLocaleString()}</td>
+            <td class="p-3 text-right">${c.active.toLocaleString()}</td>
+            <td class="p-3 text-right">${c.population.toLocaleString()}</td>
+            <td class="p-3 text-right">${c.last_updated? new Date(c.last_updated).toLocaleString(): "N/A"}</td>
+        </tr>
+      `;
+
+      tbody.innerHTML += row;
+    });
+
+});
+
+function refreshData() {
+
+  const button = event.target;
+  button.disabled = true;
+  button.innerText = "Actualizando...";
+
+  fetch("/api/countries/refresh", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      continent: "South America"
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    alert(
+      `Datos actualizados\nInsertados: ${data.inserted}\nActualizados: ${data.updated}`
+    );
+
+    location.reload();
+  })
+  .catch(err => {
+
+    console.error(err);
+    alert("Error al actualizar datos");
+
+  })
+  .finally(() => {
+
+    button.disabled = false;
+    button.innerText = "Refrescar datos";
+
+  });
+}
+
+</script>
+
+</body>
+</html>
