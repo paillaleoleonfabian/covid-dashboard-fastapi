@@ -23,7 +23,7 @@ una tabla HTML usando Tailwind.
 
 ``` bash
 git clone https://github.com/paillaleoleonfabian/covid-dashboard-fastapi.git
-cd backend
+cd covid-dashboard-fastapi
 ```
 
 ### 2. Crear entorno virtual e instalar dependencias
@@ -93,3 +93,4 @@ Luego se recarga la vista con los datos actualizados.
 ## Autor
 
 Fabian Paillaleo
+
