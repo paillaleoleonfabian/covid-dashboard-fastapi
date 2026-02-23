@@ -37,7 +37,8 @@ pip install -r requirements.txt
 ### 3. Variables de entorno
 
 Crear un archivo `.env` en la raíz del proyecto con el siguiente
-contenido:
+contenido: (También se puede copiar el archivo `.env.example` y renombrarlo a
+`.env`.)
 
 ``` env
 DB_HOST=localhost
@@ -47,9 +48,6 @@ DB_USER=postgres
 DB_PASSWORD=TU_PASSWORD
 COVID_API_URL=https://disease.sh/v3/covid-19/countries
 ```
-
-También se puede copiar el archivo `.env.example` y renombrarlo a
-`.env`.
 
 ### 4. Crear base de datos
 
@@ -93,6 +91,7 @@ Luego se recarga la vista con los datos actualizados.
 ## Autor
 
 Fabian Paillaleo
+
 
 
 
