@@ -42,9 +42,9 @@ contenido:
 ``` env
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=postgres
+DB_NAME=NOMBRE_BDD
 DB_USER=postgres
-DB_PASSWORD=postgres
+DB_PASSWORD=TU_PASSWORD
 COVID_API_URL=https://disease.sh/v3/covid-19/countries
 ```
 
@@ -93,5 +93,6 @@ Luego se recarga la vista con los datos actualizados.
 ## Autor
 
 Fabian Paillaleo
+
 
 
