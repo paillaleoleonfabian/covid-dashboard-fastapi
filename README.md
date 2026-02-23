@@ -83,14 +83,10 @@ Este proceso llama al endpoint:
 
 Luego se recarga la vista con los datos actualizados.
 
-## Seguridad
-
--   El archivo `.env` no se sube al repositorio.
--   No se incluyen credenciales en el código fuente.
-
 ## Autor
 
 Fabian Paillaleo
+
 
 
 
